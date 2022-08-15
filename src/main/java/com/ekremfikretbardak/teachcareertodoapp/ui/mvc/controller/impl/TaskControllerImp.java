@@ -116,12 +116,12 @@ public class TaskControllerImp implements ITaskController {
     @Override
     public String taskControllerUpdatePostForm(@Valid @ModelAttribute("task_update")  TaskRestDto taskRestDto, @PathVariable(name = "id")  Long id, BindingResult bindingResult) {
         RestTemplate restTemplate= new RestTemplate();
-        String URL = "http://localhost:8080/api/v1/tasks";
+        String URL = "http://localhost:8080/api/v1/tasks/"+id;
 
         if(bindingResult.hasErrors()){
             return "task_update";
         }
-        restTemplate.postForObject(URL, taskRestDto, TaskRestDto.class);
+        restTemplate.put(URL, taskRestDto, TaskRestDto.class);
         return "redirect:/task/list";
     }
 }

@@ -44,7 +44,7 @@ public class TaskServicesImpl implements ITaskServices {
     @PostMapping("/save/tasks")
     public TaskDto createTask(TaskDto taskDto) {
         TaskEntity entity = dtoToEntity(taskDto);
-        entity.setStatus("undone");
+        //entity.setStatus("undone");
         repository.save(entity);
         return taskDto;
     }
@@ -78,7 +78,6 @@ public class TaskServicesImpl implements ITaskServices {
 
         entityFind.setDefinition(taskEntity.getDefinition());
         entityFind.setStatus(taskEntity.getStatus());
-        repository.deleteById(id);
         TaskEntity saveEntity = repository.save(entityFind);
         TaskDto dto =  entityToDto(saveEntity);
         return ResponseEntity.ok(dto);
